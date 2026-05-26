@@ -1,0 +1,44 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("Dataset.csv", encoding='latin-1')
+
+
+print(df.head())
+
+
+print(df.columns)
+
+print(df.info())
+print(df.shape)
+price_counts = df['Price range'].value_counts()
+
+print("\nRestaurant count in each price range:")
+print(price_counts)
+
+price_percentage = df['Price range'].value_counts(normalize=True) * 100
+
+print("\nPercentage of restaurants in each price range:")
+print(price_percentage)
+
+
+price_counts.sort_index().plot(
+    kind='bar'
+)
+
+plt.title("Price Range Distribution")
+plt.xlabel("Price Range")
+plt.ylabel("Number of Restaurants")
+
+plt.show()
+
+df['Price range'].plot(
+    kind='hist',
+    bins=4
+)
+
+plt.title("Histogram of Price Range")
+plt.xlabel("Price Range")
+plt.ylabel("Frequency")
+
+plt.show()
